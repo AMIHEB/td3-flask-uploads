@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block sub_content %}
+<h2>Add Student</h2>
+<form class="form-horizontal" method="POST" action="/addStudent/" enctype="multipart/form-data">
+  <div class="form-group">
+    <label class="control-label col-sm-2">NCE</label>
+    <div class="col-sm-5"><input type="text" class="form-control" name="nce" required></div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Nom</label>
+    <div class="col-sm-5"><input type="text" class="form-control" name="nom" required></div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Prénom</label>
+    <div class="col-sm-5"><input type="text" class="form-control" name="prenom" required></div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Date de naissance</label>
+    <div class="col-sm-5"><input type="date" class="form-control" name="date_nais"></div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Lieu de naissance</label>
+    <div class="col-sm-5"><input type="text" class="form-control" name="lieu_nais"></div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Classe</label>
+    <div class="col-sm-5">
+      <select class="form-control" name="cod_class" required>
+        {% for c in classes %}<option value="{{ c.cod_class }}">{{ c.cod_class }} - {{ c.libelle }}</option>{% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Student photo</label>
+    <div class="col-sm-5">
+      <input type="file" name="photo" accept="image/*">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-5">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <a href="/students" class="btn btn-default">Cancel</a>
+    </div>
+  </div>
+</form>
+{% endblock %}

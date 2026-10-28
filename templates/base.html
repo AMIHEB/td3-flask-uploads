@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}TD3 - Flask-Uploads{% endblock %}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .thumb { width: 50px; height: 50px; object-fit: cover; border-radius: 50%; }
+    .preview { max-width: 200px; margin-top: 8px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header"><a class="navbar-brand" href="/students">Gestion des étudiants</a></div>
+      <ul class="nav navbar-nav">
+        <li><a href="/students">Étudiants</a></li>
+        <li><a href="/addStudent/">Ajouter</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+    {% block sub_content %}{% endblock %}
+  </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block sub_content %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h2>Edit Student</h2>
+    <form method="POST" action="{{ url_for('editStudent', student_nce=etudiant.nce) }}" enctype="multipart/form-data">
+      <div class="form-group">
+        <label>NCE</label>
+        <input type="text" class="form-control" value="{{ etudiant.nce }}" disabled>
+      </div>
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" class="form-control" id="nom" name="nom" value="{{ etudiant.nom }}" required>
+      </div>
+      <div class="form-group">
+        <label for="prenom">Prénom</label>
+        <input type="text" class="form-control" id="prenom" name="prenom" value="{{ etudiant.prenom }}" required>
+      </div>
+      <div class="form-group">
+        <label for="date_nais">Date de naissance</label>
+        <input type="date" class="form-control" id="date_nais" name="date_nais" value="{{ etudiant.date_nais or '' }}">
+      </div>
+      <div class="form-group">
+        <label for="lieu_nais">Lieu de naissance</label>
+        <input type="text" class="form-control" id="lieu_nais" name="lieu_nais" value="{{ etudiant.lieu_nais or '' }}">
+      </div>
+      <div class="form-group">
+        <label for="cod_class">Classe</label>
+        <select class="form-control" id="cod_class" name="cod_class">
+          {% for c in classes %}
+            <option value="{{ c.cod_class }}" {{ 'selected' if c.cod_class == etudiant.cod_class }}>{{ c.cod_class }} - {{ c.libelle }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="photo">Photo</label>
+        <input type="file" name="photo" id="photo" accept="image/*">
+        {% if etudiant.photo %}
+          <img class="preview" src="{{ url_for('static', filename='image/' + etudiant.photo) }}" alt="Student Photo">
+        {% else %}
+          <p>No photo available</p>
+        {% endif %}
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+      <a href="/students" class="btn btn-default">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}
